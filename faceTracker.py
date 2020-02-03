@@ -44,6 +44,8 @@ class FaceTracker(QtWidgets.QWidget):
         if globals.filterOption == 0:
             self.image = self.get_qimage(image_data)
         else:
+            img = cv2.imread(str(globals.image_filepath))
+            data = cv2.resize(img,(640,480))
             # get info from track bar and apply to result
             rMin = globals.rMin
             rMax = globals.rMax
@@ -58,14 +60,14 @@ class FaceTracker(QtWidgets.QWidget):
             lower = np.array([bMin, gMin, rMin])
             upper = np.array([bMax, gMax, rMax])
             
-            mask = cv2.inRange(image_data, lower, upper)
+            mask = cv2.inRange(data, lower, upper)
             mask = cv2.erode(mask, None, iterations=2)
             mask = cv2.dilate(mask, None, iterations=2)
 
-            new_image = cv2.convertScaleAbs(image_data, alpha=alpha, beta=beta)
-            maskedImage = cv2.bitwise_and(image_data, new_image, mask=mask)
+            new_image = cv2.convertScaleAbs(data, alpha=alpha, beta=beta)
+            maskedImage = cv2.bitwise_and(data, new_image, mask=mask)
 
-            clone_img = copy.copy(image_data)
+            clone_img = copy.copy(data)
 
             cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
             center = None
@@ -85,8 +87,8 @@ class FaceTracker(QtWidgets.QWidget):
                     # then update the list of tracked points
                     cv2.circle(clone_img, (int(x), int(y)), int(radius), (0, 255, 255), 2)
                     cv2.circle(clone_img, center, 5, (0, 0, 255), -1)
-					
-					 # font 
+
+                     # font
                     font = cv2.FONT_HERSHEY_SIMPLEX 
 
                     # org 
