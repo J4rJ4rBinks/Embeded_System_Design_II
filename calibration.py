@@ -301,12 +301,7 @@ class Calibration(QtGui.QWidget):
     def btnstate(self, b):
         if b.text() == "Blue Detection":
             if b.isChecked():
-                fileName = QtGui.QFileDialog.getOpenFileName(None, "Enter Filename.", ".txt", "(*.txt)")
-                if not fileName:
-                    print('Could not open or find the image: ', str(fileName))
-                    pass
-                else:
-                    with open(fileName) as f:
+                    with open("bluedetection.txt") as f:
                         globals.Brightness = int(f.readline().split("= ")[1])
                         globals.contrast = float(f.readline().split("= ")[1])
                         globals.rMin = float(f.readline().split("= ")[1])
@@ -328,12 +323,7 @@ class Calibration(QtGui.QWidget):
 
         if b.text() == "Green Detection":
             if b.isChecked():
-                fileName = QtGui.QFileDialog.getOpenFileName(None, "Enter Filename.", ".txt", "(*.txt)")
-                if not fileName:
-                    print('Could not open or find the image: ', str(fileName))
-                    pass
-                else:
-                    with open(fileName) as f:
+                    with open("greendetection.txt") as f:
                         globals.Brightness = int(f.readline().split("= ")[1])
                         globals.contrast = float(f.readline().split("= ")[1])
                         globals.rMin = float(f.readline().split("= ")[1])
