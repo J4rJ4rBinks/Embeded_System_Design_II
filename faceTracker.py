@@ -161,3 +161,4 @@ class FaceTrackerHolder(QtWidgets.QWidget):
         # start recording or displaying images
         self.record_video.start_recording()
         self.setLayout(layout)
+

@@ -13,8 +13,8 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
 
-        self.setWindowTitle("Tennia Ball Detection")
-        self.settings = QSettings("RIT", "Aliana")
+        self.setWindowTitle("Tennis Ball Detection")
+        self.settings = QSettings("RIT", "Jaric")
 
         # open default file
         fileName = 'parameters.txt'

@@ -10,7 +10,7 @@ class Calibration(QtGui.QWidget):
         self.labelrMinTitle = QtGui.QLabel(self)
         self.labelrMinTitle.setText("rMin")
         self.rMin = QtGui.QSlider(QtCore.Qt.Horizontal, self)
-        self.rMin.setSingleStep(.5)
+        self.rMin.setSingleStep(1)
         self.rMin.setMinimum(0)
         self.rMin.setMaximum(255)
         self.rMin.valueChanged[int].connect(self.rMinChanged)
@@ -28,7 +28,7 @@ class Calibration(QtGui.QWidget):
         self.labelrMaxTitle = QtGui.QLabel(self)
         self.labelrMaxTitle.setText("rMax")
         self.rMax = QtGui.QSlider(QtCore.Qt.Horizontal, self)
-        self.rMax.setSingleStep(.5)
+        self.rMax.setSingleStep(1)
         self.rMax.setMinimum(0)
         self.rMax.setMaximum(255)
         self.rMax.valueChanged[int].connect(self.rMaxChanged)
@@ -46,7 +46,7 @@ class Calibration(QtGui.QWidget):
         self.labelgMinTitle = QtGui.QLabel(self)
         self.labelgMinTitle.setText("gMin")
         self.gMin = QtGui.QSlider(QtCore.Qt.Horizontal, self)
-        self.gMin.setSingleStep(.5)
+        self.gMin.setSingleStep(1)
         self.gMin.setMinimum(0)
         self.gMin.setMaximum(255)
         self.gMin.valueChanged[int].connect(self.gMinChanged)
@@ -64,7 +64,7 @@ class Calibration(QtGui.QWidget):
         self.labelgMaxTitle = QtGui.QLabel(self)
         self.labelgMaxTitle.setText("gMax")
         self.gMax = QtGui.QSlider(QtCore.Qt.Horizontal, self)
-        self.gMax.setSingleStep(.5)
+        self.gMax.setSingleStep(1)
         self.gMax.setMinimum(0)
         self.gMax.setMaximum(255)
         self.gMax.valueChanged[int].connect(self.gMaxChanged)
@@ -82,7 +82,7 @@ class Calibration(QtGui.QWidget):
         self.labelbMinTitle = QtGui.QLabel(self)
         self.labelbMinTitle.setText("bMin")
         self.bMin = QtGui.QSlider(QtCore.Qt.Horizontal, self)
-        self.bMin.setSingleStep(.5)
+        self.bMin.setSingleStep(1)
         self.bMin.setMinimum(0)
         self.bMin.setMaximum(255)
         self.bMin.valueChanged[int].connect(self.bMinChanged)
@@ -100,7 +100,7 @@ class Calibration(QtGui.QWidget):
         self.labelbMaxTitle = QtGui.QLabel(self)
         self.labelbMaxTitle.setText("bMax")
         self.bMax = QtGui.QSlider(QtCore.Qt.Horizontal, self)
-        self.bMax.setSingleStep(.5)
+        self.bMax.setSingleStep(1)
         self.bMax.setMinimum(0)
         self.bMax.setMaximum(255)
         self.bMax.valueChanged[int].connect(self.bMaxChanged)
@@ -136,7 +136,7 @@ class Calibration(QtGui.QWidget):
         self.labelContrastTitle = QtGui.QLabel(self)
         self.labelContrastTitle.setText("Contrast")
         self.Contrast = QtGui.QSlider(QtCore.Qt.Horizontal, self)
-        self.Contrast.setSingleStep(.5)
+        self.Contrast.setSingleStep(1)
         self.Contrast.setMinimum(0)
         self.Contrast.setMaximum(100)
         self.Contrast.valueChanged[int].connect(self.ContrastChanged)
@@ -196,12 +196,12 @@ class Calibration(QtGui.QWidget):
         self.setLayout(layout)
 
         self.brightness.setValue(globals.Brightness)
-        self.rMin.setValue(globals.rMin)
-        self.rMax.setValue(globals.rMax)
-        self.bMin.setValue(globals.bMin)
-        self.bMax.setValue(globals.bMax)
-        self.gMin.setValue(globals.gMin)
-        self.gMax.setValue(globals.gMax)
+        self.rMin.setValue(1)
+        self.rMax.setValue(255)
+        self.bMin.setValue(1)
+        self.bMax.setValue(255)
+        self.gMin.setValue(1)
+        self.gMax.setValue(255)
         self.Contrast.setValue(globals.contrast)
 
         self.show()
@@ -214,7 +214,7 @@ class Calibration(QtGui.QWidget):
         self.brightnessEdit.setText(str(value))
 
     def brightnessEditChanged(self):
-        globals.Brightness = int(self.brightnessEdit.text())
+        globals.Brightness = str(self.brightnessEdit.text())
         self.brightness.setValue(globals.Brightness)
 
     ###################################################
@@ -224,7 +224,7 @@ class Calibration(QtGui.QWidget):
         self.ContrastEdit.setText(str(value))
 
     def ContrastEditChanged(self):
-        globals.Contrast = int(self.ContrastEdit.text())
+        globals.Contrast = str(self.ContrastEdit.text())
         self.Contrast.setValue(globals.Contrast)
 
     ###################################################
@@ -325,7 +325,7 @@ class Calibration(QtGui.QWidget):
                     self.gMax.setValue(globals.gMax)
             else:
                 pass
-	
+
         if b.text() == "Green Detection":
             if b.isChecked():
                 fileName = QtGui.QFileDialog.getOpenFileName(None, "Enter Filename.", ".txt", "(*.txt)")
