@@ -1,7 +1,7 @@
 Brightness                = 1
 contrast                  = 0.0
 rMin                      = 0
-rMax                      = 52
+rMax                      = 44
 bMin                      = 34
 bMax                      = 83
 gMin                      = 0
